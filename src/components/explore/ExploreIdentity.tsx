@@ -10,9 +10,12 @@ const pageV = { enter: { opacity: 0, y: 20 }, center: { opacity: 1, y: 0 }, exit
 /* ─── Small reusable pieces ─── */
 const Dots = ({ total, current }: { total: number; current: number }) => (
   <div className="flex items-center justify-center gap-2 py-2">
-    {Array.from({ length: total }).map((_, i) => (
-      <div key={i} className={`h-2 w-2 rounded-full transition-all duration-300 ${i < current ? "bg-primary scale-110" : "bg-border"}`} />
-    ))}
+    {Array.from({ length: total }).map((_, i) => {
+      const prideColors = ["bg-pride-red", "bg-pride-orange", "bg-pride-yellow", "bg-pride-green", "bg-pride-blue"];
+      return (
+        <div key={i} className={`h-2 w-2 rounded-full transition-all duration-300 ${i < current ? `${prideColors[i % prideColors.length]} scale-110` : "bg-border"}`} />
+      );
+    })}
   </div>
 );
 
@@ -23,23 +26,24 @@ const Bubble = ({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
   </motion.div>
 );
 
-/** Question bubble – uses a distinct accent color scheme */
+/** Question bubble – uses pride rainbow gradient */
 const QuestionBubble = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => (
   <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ ...t, delay }}
     className="cloud-shadow rounded-2xl px-5 py-4 backdrop-blur-sm"
-    style={{ background: "linear-gradient(135deg, hsl(var(--accent-lavender)), hsl(var(--accent-blue)))" }}>
+    style={{ background: "linear-gradient(135deg, hsl(275 60% 60% / 0.15), hsl(210 70% 55% / 0.15), hsl(140 55% 50% / 0.12))", border: "1px solid hsl(275 60% 60% / 0.2)" }}>
     <p className="justified-text text-foreground font-medium">{children}</p>
   </motion.div>
 );
 
 const Btn = ({ children, onClick, variant = "primary" }: { children: React.ReactNode; onClick: () => void; variant?: "primary" | "secondary" | "ghost" }) => {
   const styles = {
-    primary: "bg-gradient-to-r from-accent-lavender to-accent-pink text-foreground cloud-shadow",
+    primary: "text-foreground cloud-shadow",
     secondary: "bg-card/80 text-foreground cloud-shadow",
     ghost: "text-muted-foreground",
   };
+  const primaryStyle = variant === "primary" ? { background: "linear-gradient(135deg, hsl(0 75% 65% / 0.25), hsl(30 85% 60% / 0.25), hsl(50 90% 65% / 0.25), hsl(140 55% 50% / 0.2), hsl(210 70% 55% / 0.25), hsl(275 60% 60% / 0.25))" } : {};
   return (
-    <motion.button whileTap={{ scale: 0.98 }} onClick={onClick}
+    <motion.button whileTap={{ scale: 0.98 }} onClick={onClick} style={primaryStyle}
       className={`w-full rounded-2xl px-6 py-4 text-[0.95rem] font-medium transition-all duration-200 text-center justified-text ${styles[variant]}`}>
       {children}
     </motion.button>
@@ -52,8 +56,9 @@ const Opt = ({ label, selected, onClick, delay = 0, multi }: {
   <motion.button initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ ...t, delay }}
     whileTap={{ scale: 0.98 }} onClick={onClick}
     className={`w-full rounded-2xl px-5 py-3.5 text-left transition-all duration-200 justified-text ${
-      selected ? "bg-gradient-to-r from-accent-lavender to-accent-pink shadow-sm" : "cloud-shadow bg-card/80"
-    }`}>
+      selected ? "shadow-sm" : "cloud-shadow bg-card/80"
+    }`}
+    style={selected ? { background: "linear-gradient(135deg, hsl(275 60% 60% / 0.15), hsl(210 70% 55% / 0.15), hsl(140 55% 50% / 0.1))", border: "1px solid hsl(275 60% 60% / 0.25)" } : {}}>
     <span className="text-foreground text-[0.95rem]">
       {multi && <span className={`mr-2.5 inline-flex h-[18px] w-[18px] items-center justify-center rounded align-middle text-xs leading-none ${selected ? "bg-primary/30" : "border border-border"}`}>{selected ? "✓" : ""}</span>}
       {label}
@@ -171,7 +176,7 @@ const HistoryScreen = ({ answers, onBack }: { answers: Answers; onBack: () => vo
 /* ─── SCREEN 0: Welcome ─── */
 const S0 = ({ onNext, onHistory }: { onNext: () => void; onHistory: () => void }) => (
   <div className="flex flex-1 flex-col px-6 py-12"
-    style={{ background: "radial-gradient(circle at 50% 40%, hsl(25 60% 94%), hsl(30 20% 98%))" }}>
+    style={{ background: "radial-gradient(circle at 30% 20%, hsl(0 75% 65% / 0.08), transparent 50%), radial-gradient(circle at 70% 30%, hsl(30 85% 60% / 0.08), transparent 50%), radial-gradient(circle at 50% 60%, hsl(210 70% 55% / 0.06), transparent 50%), radial-gradient(circle at 80% 80%, hsl(275 60% 60% / 0.08), transparent 50%), hsl(30 20% 98%)" }}>
     <div className="flex items-center justify-between">
       <button onClick={onHistory} className="flex h-10 w-10 items-center justify-center rounded-full bg-card/80 cloud-shadow">
         <ArrowLeft className="h-5 w-5 text-foreground" />
@@ -262,7 +267,7 @@ const S3 = ({ answers, setAnswer, toggleMulti, revealStep, onNext }: MultiProps)
           </div>
           <input type="range" min="0" max="100" value={val}
             onChange={e => setAnswer("expr_slider", Number(e.target.value))}
-            className="w-full" style={{ background: "linear-gradient(to right, #FBCFE8, #C7D2FE, #E0E7FF)" }} />
+            className="w-full" style={{ background: "linear-gradient(to right, hsl(0 75% 65% / 0.5), hsl(50 90% 65% / 0.5), hsl(140 55% 50% / 0.4), hsl(210 70% 55% / 0.5), hsl(275 60% 60% / 0.5))" }} />
         </motion.div>
         {answers.expr_slider !== undefined && revealStep >= 1 && (
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={t} className="mt-4 flex flex-col gap-4">
@@ -374,7 +379,7 @@ const S6 = ({ answers, setAnswer, onNext }: ScreenProps) => {
 const S7 = ({ onNext }: { onNext: () => void }) => (
   <div className="flex flex-1 flex-col items-center justify-center px-6 py-12">
     <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={t} className="w-full text-center">
-      <div className="mx-auto mb-6 h-20 w-20 rounded-full bg-gradient-to-br from-accent-lavender to-accent-pink animate-breathe" />
+      <div className="mx-auto mb-6 h-20 w-20 rounded-full animate-breathe" style={{ background: "linear-gradient(135deg, hsl(0 75% 65% / 0.4), hsl(30 85% 60% / 0.4), hsl(50 90% 65% / 0.4), hsl(140 55% 50% / 0.3), hsl(210 70% 55% / 0.4), hsl(275 60% 60% / 0.4))" }} />
       <p className="justified-text text-foreground text-base px-2">
         Thank you for sharing all of this. Let&apos;s reflect on what this might mean for you.
       </p>
