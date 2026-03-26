@@ -108,8 +108,10 @@ const ExploreIdentity = () => {
     <S10 key={10} onHistory={() => setShowHistory(true)} />,
   ];
 
+  const prideGradientBg = "radial-gradient(circle at 15% 10%, hsl(0 75% 65% / 0.1), transparent 40%), radial-gradient(circle at 85% 15%, hsl(30 85% 60% / 0.1), transparent 40%), radial-gradient(circle at 10% 50%, hsl(50 90% 65% / 0.08), transparent 40%), radial-gradient(circle at 90% 50%, hsl(140 55% 50% / 0.1), transparent 40%), radial-gradient(circle at 20% 85%, hsl(210 70% 55% / 0.1), transparent 40%), radial-gradient(circle at 80% 90%, hsl(275 60% 60% / 0.1), transparent 40%), hsl(30 20% 98%)";
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen" style={{ background: prideGradientBg }}>
       <div className="mx-auto flex min-h-screen max-w-md flex-col">
         <AnimatePresence mode="wait">
           <motion.div key={screen} variants={pageV} initial="enter" animate="center" exit="exit" transition={t} className="flex flex-1 flex-col">
@@ -139,7 +141,7 @@ const HistoryScreen = ({ answers, onBack }: { answers: Answers; onBack: () => vo
   const answered = entries.filter(e => answers[e.key] !== undefined);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen" style={{ background: "radial-gradient(circle at 15% 10%, hsl(0 75% 65% / 0.1), transparent 40%), radial-gradient(circle at 85% 15%, hsl(30 85% 60% / 0.1), transparent 40%), radial-gradient(circle at 10% 50%, hsl(50 90% 65% / 0.08), transparent 40%), radial-gradient(circle at 90% 50%, hsl(140 55% 50% / 0.1), transparent 40%), radial-gradient(circle at 20% 85%, hsl(210 70% 55% / 0.1), transparent 40%), radial-gradient(circle at 80% 90%, hsl(275 60% 60% / 0.1), transparent 40%), hsl(30 20% 98%)" }}>
       <div className="mx-auto flex min-h-screen max-w-md flex-col">
         <div className="flex items-center gap-3 px-5 pt-6 pb-2">
           <button onClick={onBack} className="flex h-10 w-10 items-center justify-center rounded-full bg-card/80 cloud-shadow">
@@ -205,7 +207,8 @@ const S0 = ({ onNext, onHistory }: { onNext: () => void; onHistory: () => void }
 
 /* ─── SCREEN 1: Comfort Note ─── */
 const S1 = ({ onNext }: { onNext: () => void }) => (
-  <div className="flex flex-1 flex-col items-center justify-center px-6 py-12">
+  <div className="flex flex-1 flex-col items-center justify-center px-6 py-12"
+    style={{ background: "radial-gradient(circle at 40% 30%, hsl(330 50% 90% / 0.3), transparent 50%), radial-gradient(circle at 60% 70%, hsl(240 60% 85% / 0.25), transparent 50%)" }}>
     <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={t}
       className="cloud-shadow rounded-3xl bg-card/80 p-8 backdrop-blur-sm w-full">
       <p className="justified-text text-foreground text-base leading-relaxed">
@@ -223,7 +226,8 @@ const S2 = ({ answers, setAnswer, revealStep, onNext }: ScreenProps) => {
   const q1 = ["Comfortable", "Unsure / questioning", "Disconnected", "Exploring", "Something else"];
   const q2 = ["Yes, mostly", "Sometimes", "Not really", "Not at all", "I'm not sure"];
   return (
-    <div className="flex flex-1 flex-col px-5 py-8 overflow-y-auto">
+    <div className="flex flex-1 flex-col px-5 py-8 overflow-y-auto"
+      style={{ background: "radial-gradient(circle at 20% 20%, hsl(0 75% 65% / 0.06), transparent 45%), radial-gradient(circle at 80% 80%, hsl(275 60% 60% / 0.06), transparent 45%)" }}>
       <Dots total={5} current={1} />
       <div className="mt-6 flex flex-col gap-4">
         <Bubble>Let&apos;s start with how you feel inside.</Bubble>
@@ -255,7 +259,8 @@ const S3 = ({ answers, setAnswer, toggleMulti, revealStep, onNext }: MultiProps)
   const opts = ["Clothing", "Name", "Pronouns", "Appearance", "Not sure yet", "Other"];
   const selected = ((answers.expr_explore as string[]) || []);
   return (
-    <div className="flex flex-1 flex-col px-5 py-8 overflow-y-auto">
+    <div className="flex flex-1 flex-col px-5 py-8 overflow-y-auto"
+      style={{ background: "radial-gradient(circle at 70% 15%, hsl(30 85% 60% / 0.08), transparent 45%), radial-gradient(circle at 30% 85%, hsl(210 70% 55% / 0.08), transparent 45%)" }}>
       <Dots total={5} current={2} />
       <div className="mt-6 flex flex-col gap-4">
         <Bubble>Now, let&apos;s look at how you express yourself.</Bubble>
@@ -293,7 +298,8 @@ const S4 = ({ answers, setAnswer, revealStep, onNext }: ScreenProps) => {
   const q1 = ["Alone", "With close friends", "With family", "Online", "Public spaces"];
   const q2 = ["Often", "Sometimes", "Rarely", "Never"];
   return (
-    <div className="flex flex-1 flex-col px-5 py-8 overflow-y-auto">
+    <div className="flex flex-1 flex-col px-5 py-8 overflow-y-auto"
+      style={{ background: "radial-gradient(circle at 25% 30%, hsl(50 90% 65% / 0.08), transparent 45%), radial-gradient(circle at 75% 70%, hsl(140 55% 50% / 0.08), transparent 45%)" }}>
       <Dots total={5} current={3} />
       <div className="mt-6 flex flex-col gap-4">
         <Bubble>Different spaces can feel different.</Bubble>
@@ -325,7 +331,8 @@ const S5 = ({ answers, setAnswer, revealStep, onNext }: ScreenProps) => {
   const q2 = ["Mirror / appearance", "Being addressed a certain way", "Social situations", "Body-related changes", "Not sure", "Other"];
   const [pauseDone, setPauseDone] = useState(false);
   return (
-    <div className="flex flex-1 flex-col px-5 py-8 overflow-y-auto">
+    <div className="flex flex-1 flex-col px-5 py-8 overflow-y-auto"
+      style={{ background: "radial-gradient(circle at 60% 20%, hsl(210 70% 55% / 0.07), transparent 45%), radial-gradient(circle at 40% 80%, hsl(275 60% 60% / 0.07), transparent 45%)" }}>
       <Dots total={5} current={4} />
       <div className="mt-6 flex flex-col gap-4">
         <Bubble>Some people experience moments of discomfort around their body or how others see them. You can skip this if it doesn&apos;t feel right.</Bubble>
@@ -357,7 +364,8 @@ const S5 = ({ answers, setAnswer, revealStep, onNext }: ScreenProps) => {
 const S6 = ({ answers, setAnswer, onNext }: ScreenProps) => {
   const opts = ["Expressing myself freely", "When others see me how I feel", "In certain clothes/styles", "When I'm alone", "Still figuring it out", "Other"];
   return (
-    <div className="flex flex-1 flex-col px-5 py-8 overflow-y-auto">
+    <div className="flex flex-1 flex-col px-5 py-8 overflow-y-auto"
+      style={{ background: "radial-gradient(circle at 30% 25%, hsl(0 75% 65% / 0.06), transparent 40%), radial-gradient(circle at 70% 75%, hsl(140 55% 50% / 0.06), transparent 40%)" }}>
       <Dots total={5} current={5} />
       <div className="mt-6 flex flex-col gap-4">
         <Bubble>Let&apos;s also notice the moments that feel right.</Bubble>
@@ -377,7 +385,8 @@ const S6 = ({ answers, setAnswer, onNext }: ScreenProps) => {
 
 /* ─── SCREEN 7: Reflection Pause ─── */
 const S7 = ({ onNext }: { onNext: () => void }) => (
-  <div className="flex flex-1 flex-col items-center justify-center px-6 py-12">
+  <div className="flex flex-1 flex-col items-center justify-center px-6 py-12"
+    style={{ background: "radial-gradient(circle at 50% 40%, hsl(275 60% 60% / 0.1), transparent 50%), radial-gradient(circle at 50% 60%, hsl(210 70% 55% / 0.08), transparent 50%)" }}>
     <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={t} className="w-full text-center">
       <div className="mx-auto mb-6 h-20 w-20 rounded-full animate-breathe" style={{ background: "linear-gradient(135deg, hsl(0 75% 65% / 0.4), hsl(30 85% 60% / 0.4), hsl(50 90% 65% / 0.4), hsl(140 55% 50% / 0.3), hsl(210 70% 55% / 0.4), hsl(275 60% 60% / 0.4))" }} />
       <p className="justified-text text-foreground text-base px-2">
@@ -400,7 +409,8 @@ const S8 = ({ onNext }: { onNext: () => void }) => {
     { icon: "💖", title: "Affirming Moments", text: "You feel most aligned when you can express yourself freely." },
   ];
   return (
-    <div className="flex flex-1 flex-col py-8">
+    <div className="flex flex-1 flex-col py-8"
+      style={{ background: "radial-gradient(circle at 20% 30%, hsl(0 75% 65% / 0.07), transparent 40%), radial-gradient(circle at 80% 20%, hsl(50 90% 65% / 0.07), transparent 40%), radial-gradient(circle at 50% 80%, hsl(210 70% 55% / 0.07), transparent 40%)" }}>
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={t} className="text-center mb-6 px-5">
         <p className="text-3xl mb-2">✨</p>
         <h2 className="text-xl font-semibold text-foreground tracking-tight">Your Gender Expression Profile</h2>
@@ -427,7 +437,8 @@ const S8 = ({ onNext }: { onNext: () => void }) => {
 const S9 = ({ onNext }: { answers: Answers; setAnswer: (k: string, v: string | number) => void; revealStep: number; onNext: () => void }) => {
   const tips = ["Trying small changes in safe spaces", "Journaling your feelings", "Experimenting privately with expression", "Talking to someone you trust"];
   return (
-    <div className="flex flex-1 flex-col px-5 py-8 overflow-y-auto">
+    <div className="flex flex-1 flex-col px-5 py-8 overflow-y-auto"
+      style={{ background: "radial-gradient(circle at 35% 25%, hsl(30 85% 60% / 0.08), transparent 45%), radial-gradient(circle at 65% 75%, hsl(275 60% 60% / 0.08), transparent 45%)" }}>
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={t}>
         <p className="text-2xl mb-2">💡</p>
         <h2 className="text-lg font-semibold text-foreground mb-4 justified-text">You might explore</h2>
@@ -449,7 +460,8 @@ const S9 = ({ onNext }: { answers: Answers; setAnswer: (k: string, v: string | n
 
 /* ─── SCREEN 10: Closing ─── */
 const S10 = ({ onHistory }: { onHistory: () => void }) => (
-  <div className="flex flex-1 flex-col items-center justify-center px-6 py-12">
+  <div className="flex flex-1 flex-col items-center justify-center px-6 py-12"
+    style={{ background: "radial-gradient(circle at 25% 20%, hsl(0 75% 65% / 0.08), transparent 40%), radial-gradient(circle at 75% 30%, hsl(50 90% 65% / 0.08), transparent 40%), radial-gradient(circle at 50% 70%, hsl(210 70% 55% / 0.07), transparent 40%), radial-gradient(circle at 80% 85%, hsl(275 60% 60% / 0.08), transparent 40%)" }}>
     <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={t}
       className="cloud-shadow rounded-3xl bg-card/80 p-8 w-full mb-8">
       <p className="justified-text text-foreground text-base leading-relaxed">
