@@ -16,7 +16,6 @@ const Dots = ({ total, current }: { total: number; current: number }) => (
         <div key={i} className={`h-2 w-2 rounded-full transition-all duration-300 ${i < current ? `${prideColors[i % prideColors.length]} scale-110` : "bg-border"}`} />
       );
     })}
-    ))}
   </div>
 );
 
