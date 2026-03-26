@@ -47,6 +47,14 @@ export default {
           pink: "hsl(var(--accent-pink))",
           blue: "hsl(var(--accent-blue))",
         },
+        pride: {
+          red: "hsl(var(--pride-red))",
+          orange: "hsl(var(--pride-orange))",
+          yellow: "hsl(var(--pride-yellow))",
+          green: "hsl(var(--pride-green))",
+          blue: "hsl(var(--pride-blue))",
+          purple: "hsl(var(--pride-purple))",
+        },
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",

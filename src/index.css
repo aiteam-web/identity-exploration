@@ -36,6 +36,13 @@
 
     --radius: 1rem;
 
+    --pride-red: 0 75% 65%;
+    --pride-orange: 30 85% 60%;
+    --pride-yellow: 50 90% 65%;
+    --pride-green: 140 55% 50%;
+    --pride-blue: 210 70% 55%;
+    --pride-purple: 275 60% 60%;
+
     --accent-mint: 160 50% 95%;
     --accent-peach: 25 60% 94%;
     --accent-lavender: 240 60% 92%;
